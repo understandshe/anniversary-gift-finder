@@ -88,8 +88,7 @@ function show(y,extra){
  var year1ImageOrder=['1943200106','B09HVDM3DW','B000VIE44O','B07JJ6PMCK','B0H6DRR6HY','B07KRGR6QS','B0BRHLDXJW','B0GS6GZMYV','B0BDKRCBCG','B0FXTKKZ19'];
  L.forEach(function(p){
   var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
-  var imgIndex=year1ImageOrder.indexOf(p.asin);
-  var img=imgIndex<0?'':'<div class="pic" style="background-image:url(images/products/year1-sprite.webp);background-repeat:no-repeat;background-size:500% 200%;background-position:'+((imgIndex%5)*25)+'% '+(Math.floor(imgIndex/5)*100)+'%"></div>';
+  var img=year1ImageOrder.indexOf(p.asin)>=0?'<div class="pic"><img src="images/products/'+p.asin+'.svg" alt="'+esc(p.name)+'" loading="lazy" decoding="async" width="500" height="500"></div>':'';
   h+='<div class="card">'+img+'<div class="body"><span class="badge">'+esc(p.tier)+'</span><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
  });
  var q=encodeURIComponent(ord(b)+' anniversary '+d.traditional.split(' /')[0]+' gift');

@@ -34,6 +34,7 @@ select,input{flex:1;min-width:170px;padding:12px;border:1px solid #ddd;border-ra
 .th{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
 .th small{display:block;color:#999;font-size:11px;text-transform:uppercase;letter-spacing:.6px}
 .th b{font-size:15px}
+.flt{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.fb{padding:8px 14px;border:1px solid #e6b8c4;border-radius:999px;background:#fff;cursor:pointer;font-size:14px;font-weight:600}.fb.on{background:var(--rose);color:#fff;border-color:var(--rose)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .card .pic{position:relative;background:#fff;height:190px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #f6e7eb}
@@ -79,14 +80,17 @@ function show(y,extra){
  var h='<div class="hero"><img src="'+d.image+'" alt="'+esc(ord(b)+' anniversary '+d.traditional+' gift ideas')+'" loading="lazy" onload="window.__agfR&&__agfR()"><div class="cap"><b>'+ord(y)+' Anniversary Gifts</b><span>'+esc(d.traditional)+' &middot; '+esc(d.modern)+' &middot; '+esc(d.gemstone)+'</span></div></div>';
  if(extra)h+='<p class="note">'+extra+'</p>';
  if(b!=y)h+='<p class="note">The '+ord(y)+' year has no fixed theme, so these ideas use the '+ord(b)+' anniversary theme.</p>';
- h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div><div class="grid">';
- d.products.forEach(function(p){
+ h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div>';
+ var F=window.__agfF||'all',L=d.products.filter(function(p){return F=='all'||p.for==F||p.for=='all';});
+ h+='<div class="flt">'+['all','her','him','couple'].map(function(f){return '<button type="button" class="fb'+(f==F?' on':'')+'" data-f="'+f+'">'+(f=='all'?'All gifts':'For '+f)+'</button>';}).join('')+'</div><div class="grid">';
+ L.forEach(function(p){
   var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
   h+='<div class="card"><div class="body"><span class="badge">'+esc(p.tier)+'</span><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
  });
  var q=encodeURIComponent(ord(b)+' anniversary '+d.traditional.split(' /')[0]+' gift');
  h+='</div><a class="more" href="https://www.amazon.com/s?k='+q+'&tag='+TAG+'" target="_blank" rel="sponsored nofollow noopener">See more '+esc(d.traditional)+' gift ideas on Amazon &rarr;</a>';
- $('res').innerHTML=h;resize();
+ $('res').innerHTML=h;window.__agfY=[y,extra];
+ document.querySelectorAll('.fb').forEach(function(b){b.onclick=function(){window.__agfF=b.getAttribute('data-f');show(window.__agfY[0],window.__agfY[1]);};});resize();
 }
 window.__agfR=resize;
 document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});t.classList.add('on');var d=t.getAttribute('data-m')=='d';$('by-year').style.display=d?'none':'flex';$('by-date').style.display=d?'flex':'none';$('err').textContent='';resize();};});

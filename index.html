@@ -78,49 +78,7 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;
 function base(y){var b=K[0];K.forEach(function(k){if(k<=y)b=k;});return b;}
 function resize(){if(EMBED&&parent!==window){parent.postMessage({agf:1,h:document.documentElement.scrollHeight},'*');}}
 
-function productIllustration(p,year,theme){
- var name=(p.name||'').toLowerCase(), seed=0, s=String(p.asin||p.name||'');
- for(var i=0;i<s.length;i++)seed=(seed*31+s.charCodeAt(i))>>>0;
- var colors=['#9d6b50','#b47c62','#78928a','#a77b98','#c49b54','#6f879d','#b46d68','#8c9a68','#8f7b6a','#bd8f72'];
- var c=colors[seed%colors.length], a=colors[(seed+3)%colors.length], b=colors[(seed+6)%colors.length];
- var bg=['#fbf2ec','#f4eee5','#eff3ef','#f5edf2'][(seed>>>3)%4], art='';
- var x=90+(seed%23), y=65+((seed>>>4)%16), rot=(seed%13)-6;
- if(/blanket|throw|sheet|pillow|pillowcase|linen|wool|cotton|bedding|quilt/.test(name)){
-   art='<path d="M78 91q42-22 84 0t84 0v101q-42 22-84 0t-84 0z" fill="'+c+'" stroke="#765844" stroke-width="4"/><path d="M78 118q42-22 84 0t84 0M78 145q42-22 84 0t84 0M78 172q42-22 84 0t84 0" fill="none" stroke="'+a+'" stroke-width="5"/><path d="M96 101l0 82m28-82v82m28-82v82m28-82v82m28-82v82" stroke="#fff" stroke-opacity=".23" stroke-width="2"/><path d="M242 88l28 13v93l-28-13z" fill="'+b+'" opacity=".8"/>';
- }else if(/knife|multitool|pocket|blade/.test(name)){
-   art='<g transform="rotate('+rot+' 180 130)"><path d="M67 147q66-66 151-42l-8 43q-65 29-140 22z" fill="'+c+'" stroke="#594332" stroke-width="5"/><path d="M203 107q46-42 89-29-19 49-86 68z" fill="#cbd6d7" stroke="#819195" stroke-width="5"/><path d="M92 147l12-8m27-13 12-8m27-8 12-7" stroke="'+a+'" stroke-width="4"/><circle cx="110" cy="151" r="6" fill="#dfc17e"/><circle cx="151" cy="137" r="6" fill="#dfc17e"/></g>';
- }else if(/clock|watch|timepiece/.test(name)){
-   art='<circle cx="180" cy="127" r="78" fill="'+c+'" stroke="#70533e" stroke-width="8"/><circle cx="180" cy="127" r="61" fill="#fff8ef" stroke="'+a+'" stroke-width="4"/>';
-   for(var k=0;k<12;k++){var ang=k*Math.PI/6;var x1=180+Math.sin(ang)*49,y1=127-Math.cos(ang)*49,x2=180+Math.sin(ang)*56,y2=127-Math.cos(ang)*56;art+='<path d="M'+x1+' '+y1+'L'+x2+' '+y2+'" stroke="#765f50" stroke-width="3"/>';}
-   art+='<path d="M180 127L180 83M180 127l34 20" stroke="#6e5140" stroke-width="6" stroke-linecap="round"/><circle cx="180" cy="127" r="7" fill="'+a+'"/>';
- }else if(/rose|flower|sunflower|bouquet|blossom|petal/.test(name)){
-   art='<path d="M180 114q-26 44-19 96m19-96q29 43 23 96" fill="none" stroke="#64865e" stroke-width="8"/><path d="M166 166q-42-27-54 3 26 29 54-3m20 18q39-31 56-4-24 31-56 4" fill="#7c9e6d"/>';
-   for(var j=0;j<9;j++){var an=j*Math.PI*2/9;var px=180+Math.cos(an)*28,py=95+Math.sin(an)*25;art+='<ellipse cx="'+px+'" cy="'+py+'" rx="19" ry="27" transform="rotate('+(j*40)+' '+px+' '+py+')" fill="'+(j%2?a:c)+'"/>';}
-   art+='<circle cx="180" cy="95" r="12" fill="#e7c681"/><path d="M125 211h110" stroke="#a98a67" stroke-width="8"/>';
- }else if(/necklace|pendant|earring|jewelry|ring|birthstone|moissanite/.test(name)){
-   art='<path d="M90 70q90 150 180 0" fill="none" stroke="'+c+'" stroke-width="9"/><path d="M180 151c-34-38-76 3 0 63 76-60 34-101 0-63z" fill="'+a+'" stroke="#8e6c54" stroke-width="4"/><path d="M180 151v63m-44-45 44 45 44-45m-66-23 22 23 22-23" fill="none" stroke="#fff" stroke-width="3"/><circle cx="180" cy="151" r="7" fill="#f7e3a9"/>';
-   art+='<circle cx="95" cy="80" r="17" fill="none" stroke="'+b+'" stroke-width="6"/><circle cx="265" cy="80" r="17" fill="none" stroke="'+b+'" stroke-width="6"/>';
- }else if(/flute|glass|goblet|swan|crystal|drink|tumbler|wine/.test(name)){
-   art='<path d="M108 64h54l-8 97-19 30-19-30zM198 64h54l-8 97-19 30-19-30z" fill="#d8edf0" fill-opacity=".72" stroke="#8cb3bb" stroke-width="5"/><path d="M135 191v20m-19 0h38m71-20v20m-19 0h38" stroke="'+c+'" stroke-width="6"/><path d="M116 104h38m52 0h38" stroke="#fff" stroke-width="5"/><path d="M135 65l0 94m90-94v94" stroke="'+a+'" stroke-opacity=".65" stroke-width="3"/>';
- }else if(/figurine|statue|sculpture|couple|swan|angel/.test(name)){
-   art='<ellipse cx="180" cy="205" rx="86" ry="13" fill="'+c+'" opacity=".65"/><circle cx="146" cy="94" r="26" fill="'+a+'"/><circle cx="211" cy="88" r="28" fill="'+c+'"/><path d="M111 190q-6-76 34-76 42 0 45 76z" fill="'+a+'" stroke="#7f604a" stroke-width="4"/><path d="M174 190q-1-83 39-83 44 0 43 83z" fill="'+c+'" stroke="#7f604a" stroke-width="4"/><path d="M158 136q23 23 43 0" fill="none" stroke="#f5e6d5" stroke-width="5"/><path d="M146 69q-9-22 8-32m58 24q17-21 32-9" fill="none" stroke="'+b+'" stroke-width="5"/>';
- }else if(/spoon|cutlery|silverware|fork|utensil/.test(name)){
-   art='<g transform="rotate(-24 180 130)"><path d="M104 52v50m-12-50v34m24-34v34m-12 16v111" stroke="'+c+'" stroke-width="9" stroke-linecap="round"/><path d="M218 53q-48 0-37 52 5 19 25 23v115h17V128q20-7 25-23 11-52-30-52z" fill="'+a+'" stroke="#806b56" stroke-width="4"/></g><path d="M75 202h210" stroke="#d6bd9f" stroke-width="5"/>';
- }else if(/frame|photo|print|art|map|calendar|picture|star|song|lyrics|letter|card|book|journal|bookmark|plaque|sign|keepsake/.test(name)){
-   art='<rect x="85" y="48" width="190" height="164" rx="9" fill="'+c+'" stroke="#684c39" stroke-width="9"/><rect x="104" y="67" width="152" height="126" fill="#fff8ee"/><path d="M114 166l39-45 26 24 26-35 42 56" fill="'+a+'" opacity=".88"/><circle cx="178" cy="103" r="18" fill="'+b+'"/><path d="M119 79h40m48 0h37" stroke="'+c+'" stroke-width="4"/><path d="M121 181h118" stroke="#d2b999" stroke-width="4"/>';
-   if(/star|map/.test(name)){for(var z=0;z<8;z++){var sx=124+((z*31+seed)%117),sy=80+((z*17+seed)%65);art+='<path d="M'+sx+' '+sy+'l3 7 7 2-7 3-3 7-3-7-7-3 7-2z" fill="#d6ad60"/>';} }
- }else if(/box|tray|puzzle|board|wood/.test(name)){
-   art='<path d="M85 104l95-48 95 48-95 48z" fill="'+a+'" stroke="#79563d" stroke-width="5"/><path d="M85 104v82l95 40v-74z" fill="'+c+'" stroke="#79563d" stroke-width="5"/><path d="M275 104v82l-95 40v-74z" fill="'+b+'" stroke="#79563d" stroke-width="5"/><path d="M180 58v114m-95-68 95 42 95-42" fill="none" stroke="#ead4b4" stroke-width="4"/><path d="M180 118c-21-24-48 4 0 40 48-36 21-64 0-40z" fill="#b65d69"/>';
- }else if(/tape measure|compass|sundial|pen holder/.test(name)){
-   art='<circle cx="174" cy="126" r="71" fill="'+c+'" stroke="#805e3e" stroke-width="7"/><circle cx="174" cy="126" r="52" fill="#f8edda"/><path d="M174 79v94m-47-47h94m-80-33 66 66m0-66-66 66" stroke="'+a+'" stroke-width="4"/><path d="M174 92l18 43-18 26-18-26z" fill="#c99e5b" stroke="#8a6d43" stroke-width="3"/>';
- }else{
-   art='<rect x="96" y="66" width="168" height="137" rx="20" fill="'+c+'" stroke="#74533e" stroke-width="5"/><circle cx="180" cy="126" r="43" fill="'+a+'"/><path d="M145 126q35-42 70 0-35 42-70 0z" fill="'+b+'"/><circle cx="180" cy="126" r="10" fill="#fff0d6"/>';
- }
- var decor='';
- for(var q=0;q<7;q++){var dx=35+((seed+q*47)%290),dy=22+((seed+q*29)%190);decor+='<circle cx="'+dx+'" cy="'+dy+'" r="'+(3+q%4)+'" fill="'+(q%2?a:b)+'" opacity=".28"/>';}
- return '<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="'+bg+'"/><stop offset="1" stop-color="#eadbd1"/></linearGradient><filter id="shadow"><feGaussianBlur stdDeviation="5"/></filter></defs><rect width="360" height="250" rx="18" fill="url(#bg)"/>'+decor+'<ellipse cx="180" cy="218" rx="111" ry="11" fill="#b7a598" opacity=".32" filter="url(#shadow)"/>'+art+'<path d="M20 20h320v210H20z" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2"/><text x="180" y="239" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" letter-spacing="2" fill="#8c7668">'+String(year)+' YEAR ANNIVERSARY</text></svg>';
-}
-\nfunction show(y,extra){
+function show(y,extra){
  $('err').textContent='';var b=base(y),d=DATA.years[b];
  var h='<div class="hero"><img src="'+d.image+'" alt="'+esc(ord(b)+' anniversary '+d.traditional+' gift ideas')+'" loading="lazy" onload="window.__agfR&&__agfR()"><div class="cap"><b>'+ord(y)+' Anniversary Gifts</b><span>'+esc(d.traditional)+' &middot; '+esc(d.modern)+' &middot; '+esc(d.gemstone)+'</span></div></div>';
  if(extra)h+='<p class="note">'+extra+'</p>';
@@ -132,7 +90,7 @@ function productIllustration(p,year,theme){
  L.forEach(function(p){
   var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
   var imageExt=(p.asin==='1943200106'||p.asin==='B09HVDM3DW')?'webp':'svg';
-  var imageSrc=staticProductImages.indexOf(p.asin)>=0?'images/products/'+p.asin+'.'+imageExt:'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(productIllustration(p,y,d.traditional));
+  var imageSrc='images/products/'+p.asin+'.'+imageExt;
   var img='<div class="pic"><img src="'+imageSrc+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" width="180" height="180"></div>';
   h+='<div class="card">'+img+'<div class="body"><span class="badge">'+esc(p.tier)+'</span><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
  });

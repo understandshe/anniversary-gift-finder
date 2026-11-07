@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anniversary Gift by Year Finder: Traditional, Modern &amp; Gemstone Gifts | Understand She</title>
+<meta name="description" content="Find the perfect anniversary gift by year. Enter your anniversary year or wedding date to see the traditional, modern and gemstone theme plus hand-picked gift ideas.">
+<link rel="canonical" href="https://understandshe.github.io/anniversary-gift-finder/">
+<style>
+:root{--rose:#b0345a;--rose-d:#8f2747;--blush:#fff5f7;--line:#f0d6dc;--ink:#2b2b2b;--mute:#6b6b6b}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff}
+.wrap{max-width:860px;margin:0 auto;padding:22px 16px 28px}
+.embed .wrap{padding:14px 12px 16px}
+h1{margin:0 0 6px;font-size:28px;color:var(--rose);line-height:1.2}
+.embed h1{font-size:22px}
+.sub{margin:0 0 18px;color:var(--mute);font-size:15px;line-height:1.5}
+.box{background:var(--blush);border:1px solid var(--line);border-radius:18px;padding:16px}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab{flex:1;padding:10px;border:1px solid #e6b8c4;border-radius:12px;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:var(--ink)}
+.tab.on{background:var(--rose);border-color:var(--rose);color:#fff}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+select,input{flex:1;min-width:170px;padding:12px;border:1px solid #ddd;border-radius:12px;font-size:16px;background:#fff}
+.go{padding:12px 22px;border:0;border-radius:12px;background:var(--rose);color:#fff;font-size:16px;font-weight:600;cursor:pointer}
+.go:hover{background:var(--rose-d)}
+.err{color:#b00020;font-size:14px;min-height:18px;margin-top:8px}
+.hero{position:relative;border-radius:18px;overflow:hidden;margin:18px 0 14px;aspect-ratio:16/8;background:#f4e3e7}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 16px 14px;background:linear-gradient(transparent,rgba(40,10,20,.72));color:#fff}
+.hero .cap b{display:block;font-size:24px}
+.hero .cap span{font-size:14px;opacity:.95}
+.note{font-size:14px;color:var(--mute);margin:0 0 12px}
+.themes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.th{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+.th small{display:block;color:#999;font-size:11px;text-transform:uppercase;letter-spacing:.6px}
+.th b{font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card .pic{position:relative;background:#fff;height:190px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #f6e7eb}
+.card .pic img{max-width:85%;max-height:170px}
+.card .badge{position:absolute;top:10px;left:10px;background:var(--rose);color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.card .body{padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card .nm{font-size:15px;line-height:1.35;flex:1}
+.btn{display:block;text-align:center;padding:10px;border-radius:10px;background:#ffd814;color:#111;text-decoration:none;font-size:14px;font-weight:700}
+.btn:hover{background:#f7ca00}
+.more{display:inline-block;margin-top:14px;color:var(--rose);font-weight:700;text-decoration:none}
+.disc{margin-top:16px;font-size:12px;color:#999;line-height:1.5}
+.by{margin-top:6px;font-size:12px;color:#999}
+.by a{color:var(--rose)}
+.px{border:0;width:1px;height:1px;position:absolute;opacity:0}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.themes{grid-template-columns:1fr}.hero{aspect-ratio:4/3}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Anniversary Gift by Year Finder</h1>
+<p class="sub">Choose your anniversary year or enter your wedding date. See the traditional, modern and gemstone theme, plus gift ideas that match it.</p>
+<div class="box">
+ <div class="tabs"><button type="button" class="tab on" data-m="y">I know the year</button><button type="button" class="tab" data-m="d">Use wedding date</button></div>
+ <div class="row" id="by-year"><select id="sel" aria-label="Anniversary year"></select><button type="button" class="go" id="go1">Show gifts</button></div>
+ <div class="row" id="by-date" style="display:none"><input type="date" id="wd" aria-label="Wedding date"><button type="button" class="go" id="go2">Show gifts</button></div>
+ <div class="err" id="err"></div>
+</div>
+<div id="res"></div>
+<p class="disc">As an Amazon Associate, Understand She earns from qualifying purchases. Product photos and prices are provided by Amazon; prices and availability are shown on Amazon and can change.</p>
+<p class="by">Made by <a href="https://www.understandshe.com/" target="_blank" rel="noopener">Understand She</a></p>
+</div>
+<script>
+(function(){
+var P=new URLSearchParams(location.search),EMBED=P.has('embed');
+if(EMBED)document.body.classList.add('embed');
+var DATA,TAG,K,$=function(i){return document.getElementById(i)};
+function ord(n){var s=["th","st","nd","rd"],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function base(y){var b=K[0];K.forEach(function(k){if(k<=y)b=k;});return b;}
+function resize(){if(EMBED&&parent!==window){parent.postMessage({agf:1,h:document.documentElement.scrollHeight},'*');}}
+function img(a){return 'https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN='+a+'&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag='+TAG;}
+function show(y,extra){
+ $('err').textContent='';var b=base(y),d=DATA.years[b];
+ var h='<div class="hero"><img src="'+d.image+'" alt="'+esc(ord(b)+' anniversary '+d.traditional+' gift ideas')+'" loading="lazy" onload="window.__agfR&&__agfR()"><div class="cap"><b>'+ord(y)+' Anniversary Gifts</b><span>'+esc(d.traditional)+' &middot; '+esc(d.modern)+' &middot; '+esc(d.gemstone)+'</span></div></div>';
+ if(extra)h+='<p class="note">'+extra+'</p>';
+ if(b!=y)h+='<p class="note">The '+ord(y)+' year has no fixed theme, so these ideas use the '+ord(b)+' anniversary theme.</p>';
+ h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div><div class="grid">';
+ d.products.forEach(function(p){
+  var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
+  h+='<div class="card"><a class="pic" href="'+u+'" target="_blank" rel="sponsored nofollow noopener"><span class="badge">'+esc(p.tier)+'</span><img src="'+img(p.asin)+'" alt="'+esc(p.name)+'" loading="lazy" onload="window.__agfR&&__agfR()"></a>'+
+     '<img class="px" src="https://ir-na.amazon-adsystem.com/e/ir?t='+TAG+'&l=li2&o=1&a='+p.asin+'" alt=""><div class="body"><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
+ });
+ var q=encodeURIComponent(ord(b)+' anniversary '+d.traditional.split(' /')[0]+' gift');
+ h+='</div><a class="more" href="https://www.amazon.com/s?k='+q+'&tag='+TAG+'" target="_blank" rel="sponsored nofollow noopener">See more '+esc(d.traditional)+' gift ideas on Amazon &rarr;</a>';
+ $('res').innerHTML=h;resize();
+}
+window.__agfR=resize;
+document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});t.classList.add('on');var d=t.getAttribute('data-m')=='d';$('by-year').style.display=d?'none':'flex';$('by-date').style.display=d?'flex':'none';$('err').textContent='';resize();};});
+$('go1').onclick=function(){show(parseInt($('sel').value,10));};
+$('go2').onclick=function(){
+ var v=$('wd').value;if(!v){$('err').textContent='Please choose your wedding date.';return;}
+ var p=v.split('-'),w=new Date(+p[0],p[1]-1,+p[2]),t=new Date();t.setHours(0,0,0,0);
+ if(w>=t){$('err').textContent='Please choose a date in the past.';return;}
+ var y=t.getFullYear()-w.getFullYear(),nx=new Date(t.getFullYear(),w.getMonth(),w.getDate());
+ if(nx<t){y++;nx=new Date(t.getFullYear()+1,w.getMonth(),w.getDate());}
+ if(y<1)y=1;if(y>75){$('err').textContent='Please choose a year up to 75.';return;}
+ var days=Math.round((nx-t)/864e5);
+ show(y,days==0?'Happy anniversary! It is today.':'Your '+ord(y)+' anniversary is in '+days+' day'+(days==1?'':'s')+' ('+nx.toDateString()+').');
+};
+fetch('data/years.json').then(function(r){return r.json()}).then(function(j){
+ DATA=j;TAG=j.tag;
+ K=Object.keys(j.years).map(Number).sort(function(a,b){return a-b});
+ for(var i=1;i<=75;i++){var o=document.createElement('option');o.value=i;o.textContent=ord(i)+' anniversary';$('sel').appendChild(o);}
+ var y=parseInt(P.get('year'),10);if(y>=1&&y<=75)$('sel').value=y;
+ show(y>=1&&y<=75?y:1);
+});
+window.addEventListener('resize',resize);
+})();
+</script>
+</body>
+</html>

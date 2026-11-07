@@ -85,9 +85,12 @@ function show(y,extra){
  h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div>';
  var F=window.__agfF||'all',L=d.products.filter(function(p){return F=='all'||p.for==F||p.for=='all';});
  h+='<div class="flt">'+['all','her','him','couple'].map(function(f){return '<button type="button" class="fb'+(f==F?' on':'')+'" data-f="'+f+'">'+(f=='all'?'All gifts':'For '+f)+'</button>';}).join('')+'</div><div class="grid">';
+ var year1ImageOrder=['1943200106','B09HVDM3DW','B000VIE44O','B07JJ6PMCK','B0H6DRR6HY','B07KRGR6QS','B0BRHLDXJW','B0GS6GZMYV','B0BDKRCBCG','B0FXTKKZ19'];
  L.forEach(function(p){
   var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
-  h+='<div class="card"><div class="pic"><img src="images/products/'+p.asin+.webp" alt="'+esc(p.name)+" loading="lazy" decoding="async" width="200" height="200"></div><div class="body"><span class="badge">'+esc(p.tier)+'</span><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
+  var imgIndex=year1ImageOrder.indexOf(p.asin);
+  var img=imgIndex<0?'':'<div class="pic" style="background-image:url(images/products/year1-sprite.webp);background-repeat:no-repeat;background-size:500% 200%;background-position:'+((imgIndex%5)*25)+'% '+(Math.floor(imgIndex/5)*100)+'%"></div>';
+  h+='<div class="card">'+img+'<div class="body"><span class="badge">'+esc(p.tier)+'</span><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
  });
  var q=encodeURIComponent(ord(b)+' anniversary '+d.traditional.split(' /')[0]+' gift');
  h+='</div><a class="more" href="https://www.amazon.com/s?k='+q+'&tag='+TAG+'" target="_blank" rel="sponsored nofollow noopener">See more '+esc(d.traditional)+' gift ideas on Amazon &rarr;</a>';

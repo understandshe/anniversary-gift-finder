@@ -38,7 +38,7 @@ select,input{flex:1;min-width:170px;padding:12px;border:1px solid #ddd;border-ra
 .card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
 .card .pic{position:relative;background:#fff;height:190px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #f6e7eb}
 .card .pic img{max-width:85%;max-height:170px}
-.card .badge{position:absolute;top:10px;left:10px;background:var(--rose);color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.card .badge{align-self:flex-start;background:var(--rose);color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
 .card .body{padding:12px;display:flex;flex-direction:column;gap:10px;flex:1}
 .card .nm{font-size:15px;line-height:1.35;flex:1}
 .btn{display:block;text-align:center;padding:10px;border-radius:10px;background:#ffd814;color:#111;text-decoration:none;font-size:14px;font-weight:700}
@@ -62,7 +62,7 @@ select,input{flex:1;min-width:170px;padding:12px;border:1px solid #ddd;border-ra
  <div class="err" id="err"></div>
 </div>
 <div id="res"></div>
-<p class="disc">As an Amazon Associate, Understand She earns from qualifying purchases. Product photos and prices are provided by Amazon; prices and availability are shown on Amazon and can change.</p>
+<p class="disc">As an Amazon Associate, Understand She earns from qualifying purchases. Prices and availability are shown on Amazon and can change.</p>
 <p class="by">Made by <a href="https://www.understandshe.com/" target="_blank" rel="noopener">Understand She</a></p>
 </div>
 <script>
@@ -74,7 +74,6 @@ function ord(n){var s=["th","st","nd","rd"],v=n%100;return n+(s[(v-20)%10]||s[v]
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function base(y){var b=K[0];K.forEach(function(k){if(k<=y)b=k;});return b;}
 function resize(){if(EMBED&&parent!==window){parent.postMessage({agf:1,h:document.documentElement.scrollHeight},'*');}}
-function img(a){return 'https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN='+a+'&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag='+TAG;}
 function show(y,extra){
  $('err').textContent='';var b=base(y),d=DATA.years[b];
  var h='<div class="hero"><img src="'+d.image+'" alt="'+esc(ord(b)+' anniversary '+d.traditional+' gift ideas')+'" loading="lazy" onload="window.__agfR&&__agfR()"><div class="cap"><b>'+ord(y)+' Anniversary Gifts</b><span>'+esc(d.traditional)+' &middot; '+esc(d.modern)+' &middot; '+esc(d.gemstone)+'</span></div></div>';
@@ -83,8 +82,7 @@ function show(y,extra){
  h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div><div class="grid">';
  d.products.forEach(function(p){
   var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
-  h+='<div class="card"><a class="pic" href="'+u+'" target="_blank" rel="sponsored nofollow noopener"><span class="badge">'+esc(p.tier)+'</span><img src="'+img(p.asin)+'" alt="'+esc(p.name)+'" loading="lazy" onload="window.__agfR&&__agfR()"></a>'+
-     '<img class="px" src="https://ir-na.amazon-adsystem.com/e/ir?t='+TAG+'&l=li2&o=1&a='+p.asin+'" alt=""><div class="body"><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
+  h+='<div class="card"><div class="body"><span class="badge">'+esc(p.tier)+'</span><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
  });
  var q=encodeURIComponent(ord(b)+' anniversary '+d.traditional.split(' /')[0]+' gift');
  h+='</div><a class="more" href="https://www.amazon.com/s?k='+q+'&tag='+TAG+'" target="_blank" rel="sponsored nofollow noopener">See more '+esc(d.traditional)+' gift ideas on Amazon &rarr;</a>';

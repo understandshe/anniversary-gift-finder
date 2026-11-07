@@ -30,4 +30,4 @@ Simple iframe option:
 
 ## Disclosure
 
-As an Amazon Associate, Understand She earns from qualifying purchases. Product photos and prices come from Amazon.
+As an Amazon Associate, Understand She earns from qualifying purchases.

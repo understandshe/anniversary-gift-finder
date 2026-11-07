@@ -85,7 +85,7 @@ function show(y,extra){
  h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div>';
  var F=window.__agfF||'all',L=d.products.filter(function(p){return F=='all'||p.for==F||p.for=='all';});
  h+='<div class="flt">'+['all','her','him','couple'].map(function(f){return '<button type="button" class="fb'+(f==F?' on':'')+'" data-f="'+f+'">'+(f=='all'?'All gifts':'For '+f)+'</button>';}).join('')+'</div><div class="grid">';
- var productImageOrder=['1943200106','B09HVDM3DW','B000VIE44O','B07JJ6PMCK','B0H6DRR6HY','B07KRGR6QS','B0BRHLDXJW','B0GS6GZMYV','B0BDKRCBCG','B0FXTKKZ19','B08F48LR45','B07MTGVQRY','B0HJR9YK7B','B0C6HN58GX','B017KZLWUY','B01CEWQP1E','B0GVJN32B9','B0FV3BSGCF','B0BJCV9237','B0DNY8594H'];
+ var productImageOrder=['1943200106','B09HVDM3DW','B000VIE44O','B07JJ6PMCK','B0H6DRR6HY','B07KRGR6QS','B0BRHLDXJW','B0GS6GZMYV','B0BDKRCBCG','B0FXTKKZ19','B08F48LR45','B07MTGVQRY','B0HJR9YK7B','B0C6HN58GX','B017KZLWUY','B01CEWQP1E','B0GVJN32B9','B0FV3BSGCF','B0BJCV9237','B0DNY8594H','B0GZV48Y3M','B00HI6R8RC','B00S8TI0DO','B07DXDGMQ4','B08JVGG7P1','B0F4YPYHT5','B0GVM6NTM3','B0G7H9QCN7','B07J1K1F1R','B0DNLM4KYR','B0CJ2SL5CX','B088GN1MZ8','B00SVIUTM2','B08Z76Z275','B08NWBLC25','B0F83MZ3GL','B0BRHLCS93','B00JWEJ7ZO','B0GJKLVFZR','B0HDZG9QBN'];
  L.forEach(function(p){
   var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
   var imageExt=(p.asin==='1943200106'||p.asin==='B09HVDM3DW')?'webp':'svg';

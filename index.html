@@ -85,11 +85,11 @@ function show(y,extra){
  h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div>';
  var F=window.__agfF||'all',L=d.products.filter(function(p){return F=='all'||p.for==F||p.for=='all';});
  h+='<div class="flt">'+['all','her','him','couple'].map(function(f){return '<button type="button" class="fb'+(f==F?' on':'')+'" data-f="'+f+'">'+(f=='all'?'All gifts':'For '+f)+'</button>';}).join('')+'</div><div class="grid">';
- var year1ImageOrder=['1943200106','B09HVDM3DW','B000VIE44O','B07JJ6PMCK','B0H6DRR6HY','B07KRGR6QS','B0BRHLDXJW','B0GS6GZMYV','B0BDKRCBCG','B0FXTKKZ19'];
+ var productImageOrder=['1943200106','B09HVDM3DW','B000VIE44O','B07JJ6PMCK','B0H6DRR6HY','B07KRGR6QS','B0BRHLDXJW','B0GS6GZMYV','B0BDKRCBCG','B0FXTKKZ19','B08F48LR45','B07MTGVQRY','B0HJR9YK7B','B0C6HN58GX','B017KZLWUY','B01CEWQP1E','B0GVJN32B9','B0FV3BSGCF','B0BJCV9237','B0DNY8594H'];
  L.forEach(function(p){
   var u='https://www.amazon.com/dp/'+p.asin+'?tag='+TAG;
   var imageExt=(p.asin==='1943200106'||p.asin==='B09HVDM3DW')?'webp':'svg';
-  var img=year1ImageOrder.indexOf(p.asin)>=0?'<div class="pic"><img src="images/products/'+p.asin+'.'+imageExt+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" width="180" height="180"></div>':'';
+  var img=productImageOrder.indexOf(p.asin)>=0?'<div class="pic"><img src="images/products/'+p.asin+'.'+imageExt+'" alt="'+esc(p.name)+'" loading="lazy" decoding="async" width="180" height="180"></div>':'';
   h+='<div class="card">'+img+'<div class="body"><span class="badge">'+esc(p.tier)+'</span><div class="nm">'+esc(p.name)+'</div><a class="btn" href="'+u+'" target="_blank" rel="sponsored nofollow noopener">Check price on Amazon</a></div></div>';
  });
  var q=encodeURIComponent(ord(b)+' anniversary '+d.traditional.split(' /')[0]+' gift');

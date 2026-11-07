@@ -80,7 +80,7 @@ function resize(){if(EMBED&&parent!==window){parent.postMessage({agf:1,h:documen
 
 function show(y,extra){
  $('err').textContent='';var b=base(y),d=DATA.years[b];
- var h='<div class="hero"><img src="'+d.image+'" alt="'+esc(ord(b)+' anniversary '+d.traditional+' gift ideas')+'" loading="lazy" onload="window.__agfR&&__agfR()"><div class="cap"><b>'+ord(y)+' Anniversary Gifts</b><span>'+esc(d.traditional)+' &middot; '+esc(d.modern)+' &middot; '+esc(d.gemstone)+'</span></div></div>';
+ var h='<div class="hero"><img src="'+d.image+'" alt="'+esc(ord(b)+' anniversary '+d.traditional+' gift ideas')+'" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='https://understandshe.github.io/anniversary-gift-finder/images/products/1943200106.webp';" onload="window.__agfR&&__agfR()"><div class="cap"><b>'+ord(y)+' Anniversary Gifts</b><span>'+esc(d.traditional)+' &middot; '+esc(d.modern)+' &middot; '+esc(d.gemstone)+'</span></div></div>';
  if(extra)h+='<p class="note">'+extra+'</p>';
  if(b!=y)h+='<p class="note">The '+ord(y)+' year has no fixed theme, so these ideas use the '+ord(b)+' anniversary theme.</p>';
  h+='<div class="themes"><div class="th"><small>Traditional</small><b>'+esc(d.traditional)+'</b></div><div class="th"><small>Modern</small><b>'+esc(d.modern)+'</b></div><div class="th"><small>Gemstone</small><b>'+esc(d.gemstone)+'</b></div></div>';
